@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Буггати — детейлинг-центр в Алматы</title>
+  <meta name="description" content="Детейлинг-центр «Буггати»: мойка, полировка, керамика, химчистка салона и защитная плёнка. Алматы.">
+  <style>
+    :root {
+      --gold: #d4a017;
+      --gold-soft: #f0c75e;
+      --bg: #0e1116;
+      --bg-2: #161b22;
+      --card: #1c232c;
+      --text: #f4f1ea;
+      --muted: #b8b3a8;
+      --line: rgba(212, 160, 23, 0.28);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", Times, serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      font-size: 17px;
+    }
+
+    h1, h2, h3, .logo, .price, .btn {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      width: min(1100px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(14, 17, 22, 0.94);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+    }
+
+    .logo {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+    }
+
+    nav a {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    nav a:hover,
+    nav a:focus {
+      color: var(--gold-soft);
+    }
+
+    .hero {
+      padding: 56px 0 48px;
+      background:
+        radial-gradient(ellipse at top right, rgba(212, 160, 23, 0.18), transparent 48%),
+        linear-gradient(180deg, #12161c 0%, var(--bg) 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 7vw, 4.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin: 10px 0 16px;
+    }
+
+    .eyebrow {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 1.08rem;
+      max-width: 38rem;
+    }
+
+    .hero-art {
+      min-height: 260px;
+      border-radius: 24px;
+      background:
+        linear-gradient(145deg, #2a3340 0%, #12171d 55%, #1a1408 100%);
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      font-size: 5.5rem;
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    section {
+      padding: 56px 0;
+    }
+
+    h2 {
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .section-note {
+      color: var(--muted);
+      margin-bottom: 28px;
+      max-width: 40rem;
+    }
+
+    .services {
+      display: grid;
+      gap: 16px;
+    }
+
+    .service {
+      display: grid;
+      grid-template-columns: 72px 1fr auto;
+      gap: 16px;
+      align-items: center;
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius);
+      padding: 18px;
+    }
+
+    .icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+    }
+
+    .c1 { background: #1f3a4d; }
+    .c2 { background: #3d2a12; }
+    .c3 { background: #2a1f3d; }
+    .c4 { background: #1e3328; }
+    .c5 { background: #3a1f24; }
+    .c6 { background: #1f2d3a; }
+
+    .service h3 {
+      font-size: 1.15rem;
+      margin-bottom: 4px;
+    }
+
+    .service p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .price {
+      font-weight: 800;
+      color: var(--gold);
+      white-space: nowrap;
+      font-size: 1.05rem;
+    }
+
+    .why {
+      background: var(--bg-2);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .why-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 22px;
+      border-top: 3px solid var(--gold);
+    }
+
+    .why-card .mark {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .why-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .why-card p {
+      color: var(--muted);
+    }
+
+    .contacts-box {
+      display: grid;
+      gap: 18px;
+      background: var(--card);
+      border-radius: 24px;
+      padding: 28px;
+      border: 1px solid var(--line);
+    }
+
+    .contacts-box dl {
+      display: grid;
+      gap: 14px;
+    }
+
+    .contacts-box dt {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .contacts-box dd {
+      color: var(--text);
+    }
+
+    .contacts-box a.phone {
+      color: var(--gold-soft);
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--gold);
+      color: #16120a;
+      font-weight: 800;
+      padding: 14px 22px;
+      border-radius: 999px;
+      width: fit-content;
+    }
+
+    .btn:hover,
+    .btn:focus {
+      background: var(--gold-soft);
+    }
+
+    footer {
+      padding: 24px 0 36px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    @media (max-width: 800px) {
+      .hero-grid,
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service {
+        grid-template-columns: 56px 1fr;
+      }
+
+      .icon {
+        width: 56px;
+        height: 56px;
+        font-size: 1.5rem;
+      }
+
+      .price {
+        grid-column: 2;
+      }
+
+      .hero-art {
+        min-height: 180px;
+        font-size: 4rem;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap header-inner">
+      <a class="logo" href="#top">Буггати</a>
+      <nav>
+        <a href="#uslugi">Услуги</a>
+        <a href="#pochemu">Почему мы</a>
+        <a href="#kontakty">Контакты</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">Детейлинг-центр</p>
+          <h1>Буггати</h1>
+          <p class="lead">Премиальный уход за автомобилем в Алматы: бережная мойка, полировка, керамика и защита кузова. Работаем с любым классом машин — от повседневных до спорткаров.</p>
+        </div>
+        <div class="hero-art" aria-hidden="true">🚗</div>
+      </div>
+    </section>
+
+    <section id="uslugi">
+      <div class="wrap">
+        <h2>Услуги</h2>
+        <p class="section-note">Цены указаны в тенге. Точная стоимость зависит от класса автомобиля — уточняйте у мастера.</p>
+        <div class="services">
+          <article class="service">
+            <div class="icon c1" aria-hidden="true">💧</div>
+            <div>
+              <h3>Комплексная мойка</h3>
+              <p>Двухфазная мойка кузова, дисков и арок с сушкой и чернением резины.</p>
+            </div>
+            <p class="price">от 8 000 ₸</p>
+          </article>
+          <article class="service">
+            <div class="icon c2" aria-hidden="true">✨</div>
+            <div>
+              <h3>Полировка кузова</h3>
+              <p>Убираем царапины и окисление, возвращаем заводской блеск ЛКП.</p>
+            </div>
+            <p class="price">от 45 000 ₸</p>
+          </article>
+          <article class="service">
+            <div class="icon c3" aria-hidden="true">🛡️</div>
+            <div>
+              <h3>Керамическое покрытие</h3>
+              <p>Защитный слой на 12–24 месяца: гидрофоб, блеск и проще мойка.</p>
+            </div>
+            <p class="price">от 120 000 ₸</p>
+          </article>
+          <article class="service">
+            <div class="icon c4" aria-hidden="true">🛋️</div>
+            <div>
+              <h3>Химчистка салона</h3>
+              <p>Сиденья, ковры, потолок и пластик. Удаляем запахи и пятна.</p>
+            </div>
+            <p class="price">от 35 000 ₸</p>
+          </article>
+          <article class="service">
+            <div class="icon c5" aria-hidden="true">🎞️</div>
+            <div>
+              <h3>Защитная плёнка PPF</h3>
+              <p>Оклейка капота, бампера и зон риска от сколов и пескоструя.</p>
+            </div>
+            <p class="price">от 250 000 ₸</p>
+          </article>
+          <article class="service">
+            <div class="icon c6" aria-hidden="true">⚙️</div>
+            <div>
+              <h3>Детейлинг дисков</h3>
+              <p>Глубокая очистка дисков, суппортов и обработка шин.</p>
+            </div>
+            <p class="price">от 12 000 ₸</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="why" id="pochemu">
+      <div class="wrap">
+        <h2>Почему мы</h2>
+        <p class="section-note">Три причины доверить автомобиль «Буггати».</p>
+        <div class="why-grid">
+          <article class="why-card">
+            <div class="mark" aria-hidden="true">🏆</div>
+            <h3>Опыт с премиум-классом</h3>
+            <p>Мастера работают с дорогими покрытиями и знают, как не повредить сложную краску и плёнку.</p>
+          </article>
+          <article class="why-card">
+            <div class="mark" aria-hidden="true">🧪</div>
+            <h3>Профессиональная химия</h3>
+            <p>Используем составы для детейлинга, а не бытовую мойку. Безопасно для керамики и кожи.</p>
+          </article>
+          <article class="why-card">
+            <div class="mark" aria-hidden="true">📜</div>
+            <h3>Гарантия на покрытие</h3>
+            <p>На керамику и плёнку даём письменную гарантию и бесплатный осмотр через месяц.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakty">
+      <div class="wrap">
+        <h2>Контакты</h2>
+        <p class="section-note">Приезжайте в бокс или напишите в WhatsApp — подскажем свободное окно.</p>
+        <div class="contacts-box">
+          <dl>
+            <div>
+              <dt>Адрес</dt>
+              <dd>г. Алматы, ул. Сатпаева, 90/5, детейлинг-бокс «Буггати»</dd>
+            </div>
+            <div>
+              <dt>Телефон</dt>
+              <dd><a class="phone" href="tel:+77475551890">+7 (747) 555-18-90</a></dd>
+            </div>
+            <div>
+              <dt>Часы работы</dt>
+              <dd>ежедневно с 09:00 до 21:00</dd>
+            </div>
+            <div>
+              <dt>График работы</dt>
+              <dd>понедельник — воскресенье, без выходных</dd>
+            </div>
+          </dl>
+          <a class="btn" href="https://wa.me/77475551890">Написать в WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© 2026 Детейлинг-центр «Буггати», Алматы</div>
+  </footer>
+</body>
+</html>
