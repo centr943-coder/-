@@ -3,463 +3,672 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Буггати — детейлинг-центр в Алматы</title>
-  <meta name="description" content="Детейлинг-центр «Буггати»: мойка, полировка, керамика, химчистка салона и защитная плёнка. Алматы.">
+  <meta name="theme-color" content="#11100e">
+  <meta name="description" content="ФАСОН — мужские пальто, пиджаки, костюмы и классическая одежда. Подбор образа и примерка.">
+  <title>ФАСОН — мужская классическая одежда</title>
   <style>
     :root {
-      --gold: #d4a017;
-      --gold-soft: #f0c75e;
-      --bg: #0e1116;
-      --bg-2: #161b22;
-      --card: #1c232c;
-      --text: #f4f1ea;
-      --muted: #b8b3a8;
-      --line: rgba(212, 160, 23, 0.28);
-      --radius: 18px;
+      --ink: #161513;
+      --ink-soft: #24211d;
+      --paper: #f3f0e9;
+      --paper-2: #ebe6dc;
+      --ivory: #faf8f3;
+      --muted: #777168;
+      --line: rgba(31, 28, 24, 0.14);
+      --light-line: rgba(255,255,255,.17);
+      --accent: #a99067;
+      --max: 1320px;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Inter, "Helvetica Neue", Arial, sans-serif;
+      --ease: cubic-bezier(.2,.7,.2,1);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: Georgia, "Times New Roman", Times, serif;
-      background: var(--bg);
-      color: var(--text);
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: var(--sans);
       line-height: 1.55;
-      font-size: 17px;
+      overflow-x: hidden;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
     }
+    body.menu-open { overflow: hidden; }
+    a { color: inherit; }
+    img { width: 100%; display: block; }
+    button, input, textarea { font: inherit; }
+    ::selection { background: #2a2824; color: #fff; }
 
-    h1, h2, h3, .logo, .price, .btn {
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .wrap {
-      width: min(1100px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(14, 17, 22, 0.94);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 14px 0;
-    }
-
-    .logo {
-      font-size: 1.15rem;
-      font-weight: 800;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px 16px;
-    }
-
-    nav a {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.92rem;
-      color: var(--muted);
-    }
-
-    nav a:hover,
-    nav a:focus {
-      color: var(--gold-soft);
-    }
-
-    .hero {
-      padding: 56px 0 48px;
-      background:
-        radial-gradient(ellipse at top right, rgba(212, 160, 23, 0.18), transparent 48%),
-        linear-gradient(180deg, #12161c 0%, var(--bg) 100%);
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 28px;
-      align-items: center;
-    }
-
-    h1 {
-      font-size: clamp(2.4rem, 7vw, 4.4rem);
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      margin: 10px 0 16px;
-    }
-
+    .wrap { width: min(var(--max), calc(100% - 64px)); margin: 0 auto; }
     .eyebrow {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.82rem;
-      letter-spacing: 0.18em;
+      font-size: 11px;
+      letter-spacing: .22em;
       text-transform: uppercase;
-      color: var(--gold);
+      font-weight: 650;
     }
-
-    .lead {
-      color: var(--muted);
-      font-size: 1.08rem;
-      max-width: 38rem;
+    .display {
+      font-family: var(--serif);
+      font-weight: 400;
+      letter-spacing: -.045em;
+      line-height: .97;
     }
+    .lead { color: var(--muted); max-width: 62ch; font-size: 16px; }
+    .section { padding: 116px 0; }
+    .section--tight { padding: 92px 0; }
+    .section--dark { background: var(--ink); color: var(--ivory); }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: 46px; }
+    .section-head h2 { font-size: clamp(42px, 5vw, 74px); }
+    .section-head .lead { max-width: 45ch; }
 
-    .hero-art {
-      min-height: 260px;
-      border-radius: 24px;
-      background:
-        linear-gradient(145deg, #2a3340 0%, #12171d 55%, #1a1408 100%);
-      border: 1px solid var(--line);
-      display: grid;
-      place-items: center;
-      font-size: 5.5rem;
-      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.35);
+    /* Header */
+    .topbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 100;
+      color: #fff;
+      transition: background .35s ease, color .35s ease, border-color .35s ease, transform .35s ease;
+      border-bottom: 1px solid transparent;
     }
-
-    section {
-      padding: 56px 0;
+    .topbar.scrolled {
+      background: rgba(244, 241, 234, .82);
+      color: var(--ink);
+      border-color: rgba(26,23,20,.09);
+      backdrop-filter: blur(18px) saturate(125%);
+      -webkit-backdrop-filter: blur(18px) saturate(125%);
     }
-
-    h2 {
-      font-size: clamp(1.9rem, 5vw, 3rem);
-      letter-spacing: -0.03em;
-      margin-bottom: 8px;
-    }
-
-    .section-note {
-      color: var(--muted);
-      margin-bottom: 28px;
-      max-width: 40rem;
-    }
-
-    .services {
-      display: grid;
-      gap: 16px;
-    }
-
-    .service {
-      display: grid;
-      grid-template-columns: 72px 1fr auto;
-      gap: 16px;
-      align-items: center;
-      background: var(--card);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: var(--radius);
-      padding: 18px;
-    }
-
-    .icon {
-      width: 72px;
-      height: 72px;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      font-size: 2rem;
-    }
-
-    .c1 { background: #1f3a4d; }
-    .c2 { background: #3d2a12; }
-    .c3 { background: #2a1f3d; }
-    .c4 { background: #1e3328; }
-    .c5 { background: #3a1f24; }
-    .c6 { background: #1f2d3a; }
-
-    .service h3 {
-      font-size: 1.15rem;
-      margin-bottom: 4px;
-    }
-
-    .service p {
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .price {
-      font-weight: 800;
-      color: var(--gold);
+    .topbar-inner { height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+    .brand {
+      text-decoration: none;
+      font-family: var(--serif);
+      font-size: 28px;
+      letter-spacing: .09em;
+      font-weight: 600;
       white-space: nowrap;
-      font-size: 1.05rem;
     }
-
-    .why {
-      background: var(--bg-2);
-    }
-
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .why-card {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 22px;
-      border-top: 3px solid var(--gold);
-    }
-
-    .why-card .mark {
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-    }
-
-    .why-card h3 {
-      font-size: 1.2rem;
-      margin-bottom: 8px;
-    }
-
-    .why-card p {
-      color: var(--muted);
-    }
-
-    .contacts-box {
-      display: grid;
-      gap: 18px;
-      background: var(--card);
-      border-radius: 24px;
-      padding: 28px;
-      border: 1px solid var(--line);
-    }
-
-    .contacts-box dl {
-      display: grid;
-      gap: 14px;
-    }
-
-    .contacts-box dt {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
+    .desktop-nav { display: flex; align-items: center; gap: 25px; margin-left: auto; }
+    .desktop-nav a {
+      text-decoration: none;
+      font-size: 11px;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 4px;
+      letter-spacing: .14em;
+      opacity: .88;
+      position: relative;
     }
-
-    .contacts-box dd {
-      color: var(--text);
+    .desktop-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 100%; bottom: -7px;
+      height: 1px; background: currentColor;
+      transition: right .25s ease;
     }
-
-    .contacts-box a.phone {
-      color: var(--gold-soft);
-      font-family: Arial, Helvetica, sans-serif;
-      font-weight: 700;
-      font-size: 1.25rem;
+    .desktop-nav a:hover::after { right: 0; }
+    .header-cta {
+      text-decoration: none;
+      border: 1px solid currentColor;
+      padding: 12px 17px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      transition: background .25s ease, color .25s ease;
     }
+    .header-cta:hover { background: #fff; color: var(--ink); border-color: #fff; }
+    .topbar.scrolled .header-cta:hover { background: var(--ink); color: var(--ivory); border-color: var(--ink); }
+    .burger { display: none; width: 44px; height: 44px; border: 0; background: none; color: inherit; position: relative; cursor: pointer; }
+    .burger span { position: absolute; left: 10px; width: 24px; height: 1px; background: currentColor; transition: transform .25s ease, top .25s ease; }
+    .burger span:first-child { top: 17px; }
+    .burger span:last-child { top: 25px; }
+    .burger.active span:first-child { top: 21px; transform: rotate(45deg); }
+    .burger.active span:last-child { top: 21px; transform: rotate(-45deg); }
 
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      z-index: 90;
+      inset: 0;
+      background: rgba(18,17,15,.985);
+      color: #fff;
+      padding: 118px 32px 40px;
+    }
+    .mobile-menu.open { display: flex; flex-direction: column; }
+    .mobile-menu nav { display: grid; gap: 10px; }
+    .mobile-menu nav a { text-decoration: none; font-family: var(--serif); font-size: clamp(34px, 9vw, 54px); line-height: 1.1; }
+    .mobile-menu .mobile-meta { margin-top: auto; padding-top: 32px; border-top: 1px solid var(--light-line); color: rgba(255,255,255,.58); font-size: 13px; }
+
+    /* Hero */
+    .hero {
+      min-height: 96svh;
+      display: grid;
+      align-items: end;
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+      background: #111;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -24px;
+      background-image: url('https://images.unsplash.com/photo-1782789083007-27d93cb68a95?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000');
+      background-size: cover;
+      background-position: 58% 38%;
+      filter: blur(5px) saturate(.78) contrast(1.03);
+      transform: scale(1.035);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(9,9,8,.78) 0%, rgba(9,9,8,.47) 46%, rgba(9,9,8,.19) 78%),
+        linear-gradient(180deg, rgba(9,9,8,.28) 0%, rgba(9,9,8,.05) 45%, rgba(9,9,8,.68) 100%);
+    }
+    .hero-content { position: relative; z-index: 2; padding: 160px 0 76px; width: min(850px, 100%); }
+    .hero .eyebrow { color: rgba(255,255,255,.72); margin-bottom: 22px; }
+    .hero h1 { font-size: clamp(76px, 12vw, 176px); letter-spacing: -.055em; margin-left: -4px; }
+    .hero-slogan { font-family: var(--serif); font-size: clamp(23px, 3vw, 38px); margin-top: 22px; max-width: 22ch; line-height: 1.12; }
+    .hero-categories { margin-top: 24px; color: rgba(255,255,255,.72); font-size: 12px; text-transform: uppercase; letter-spacing: .17em; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
     .btn {
+      min-height: 51px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      background: var(--gold);
-      color: #16120a;
-      font-weight: 800;
-      padding: 14px 22px;
-      border-radius: 999px;
-      width: fit-content;
+      gap: 10px;
+      padding: 0 22px;
+      border: 1px solid transparent;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 10px;
+      font-weight: 650;
+      letter-spacing: .16em;
+      cursor: pointer;
+      transition: transform .25s var(--ease), background .25s ease, color .25s ease, border-color .25s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn--light { background: var(--ivory); color: var(--ink); }
+    .btn--ghost-light { border-color: rgba(255,255,255,.65); color: #fff; background: rgba(255,255,255,.04); backdrop-filter: blur(8px); }
+    .btn--dark { background: var(--ink); color: #fff; }
+    .btn--outline { border-color: var(--ink); color: var(--ink); background: transparent; }
+    .hero-foot { position: absolute; z-index: 3; right: 32px; bottom: 76px; writing-mode: vertical-rl; font-size: 9px; letter-spacing: .23em; text-transform: uppercase; color: rgba(255,255,255,.52); }
+
+    /* Collections */
+    .collections-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .collection-card { position: relative; min-height: 610px; overflow: hidden; background: #222; color: #fff; text-decoration: none; }
+    .collection-card img { position: absolute; inset: 0; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+    .collection-card::after { content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.62)); }
+    .collection-card:hover img { transform: scale(1.045); }
+    .collection-copy { position: absolute; z-index: 2; left: 28px; right: 28px; bottom: 28px; display: flex; align-items: end; justify-content: space-between; gap: 20px; }
+    .collection-copy h3 { font-family: var(--serif); font-size: clamp(34px, 3.4vw, 48px); font-weight: 400; letter-spacing: -.03em; }
+    .collection-copy span { width: 40px; height: 40px; border: 1px solid rgba(255,255,255,.45); border-radius: 50%; display:grid; place-items:center; font-size:18px; transition: transform .25s ease, background .25s ease, color .25s ease; }
+    .collection-card:hover .collection-copy span { transform: translateX(4px); background:#fff; color:#111; }
+
+    /* Products */
+    .products-section { background: var(--ivory); }
+    .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 18px; }
+    .product-card { min-width: 0; }
+    .product-media { aspect-ratio: .79; background: #ddd8cf; overflow: hidden; position: relative; }
+    .product-media img { height: 100%; object-fit: cover; transition: transform .65s var(--ease); }
+    .product-card:hover .product-media img { transform: scale(1.035); }
+    .product-badge { position: absolute; left: 14px; top: 14px; background: rgba(250,248,243,.88); backdrop-filter: blur(8px); padding: 7px 9px; font-size: 9px; text-transform: uppercase; letter-spacing: .14em; }
+    .product-copy { padding: 17px 2px 0; }
+    .product-kicker { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .15em; }
+    .product-row { margin-top: 7px; display:flex; justify-content:space-between; gap:20px; align-items:baseline; }
+    .product-row h3 { font-family: var(--serif); font-weight: 400; font-size: 23px; line-height: 1.12; }
+    .price { font-size: 14px; font-weight: 600; white-space: nowrap; }
+    .product-links { display:flex; gap:18px; margin-top: 13px; }
+    .text-link { font-size: 10px; text-transform:uppercase; letter-spacing:.13em; text-underline-offset:5px; text-decoration-thickness:1px; }
+
+    /* Editorial */
+    .editorial { min-height: 740px; position: relative; display:grid; align-items:end; color:#fff; overflow:hidden; background:#111; }
+    .editorial img { position:absolute; inset:0; height:112%; object-fit:cover; object-position:center 38%; transform:translateY(var(--parallax, 0px)); will-change: transform; }
+    .editorial::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg, rgba(12,11,10,.7), rgba(12,11,10,.12) 70%), linear-gradient(180deg, transparent 42%, rgba(12,11,10,.58)); }
+    .editorial-content { position:relative; z-index:2; padding:84px 0; max-width:740px; }
+    .editorial h2 { font-size:clamp(52px, 7vw, 104px); }
+    .editorial p { font-family:var(--serif); font-size:clamp(19px, 2vw, 27px); max-width:37ch; margin-top:20px; color:rgba(255,255,255,.83); }
+    .editorial .btn { margin-top:30px; }
+
+    /* Benefits */
+    .benefits-grid { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .benefit { padding:30px 24px 34px 0; }
+    .benefit + .benefit { border-left:1px solid var(--line); padding-left:24px; }
+    .benefit small { display:block; color:var(--accent); font-size:10px; letter-spacing:.17em; margin-bottom:28px; }
+    .benefit h3 { font-family:var(--serif); font-size:25px; font-weight:400; margin-bottom:10px; }
+    .benefit p { color:var(--muted); font-size:14px; }
+
+    /* About */
+    .about-grid { display:grid; grid-template-columns:1.08fr .92fr; gap:70px; align-items:center; }
+    .about-media { min-height:650px; overflow:hidden; background:#222; }
+    .about-media img { height:650px; object-fit:cover; }
+    .about-copy .eyebrow { color:var(--accent); margin-bottom:24px; }
+    .about-copy h2 { font-size:clamp(48px,6vw,84px); }
+    .about-copy .intro { font-family:var(--serif); font-size:24px; line-height:1.35; margin:28px 0 20px; max-width:24ch; }
+    .about-copy p:not(.intro) { color:var(--muted); max-width:52ch; }
+    .about-facts { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; margin-top:34px; padding-top:26px; border-top:1px solid var(--line); }
+    .about-facts strong { display:block; font-family:var(--serif); font-size:30px; font-weight:400; }
+    .about-facts span { display:block; color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.13em; margin-top:4px; }
+
+    /* Form + contacts */
+    .contact-zone { background:var(--ink); color:#fff; }
+    .contact-grid { display:grid; grid-template-columns: .95fr 1.05fr; gap:90px; align-items:start; }
+    .contact-intro h2 { font-size:clamp(50px,6vw,84px); }
+    .contact-intro > p { color:rgba(255,255,255,.62); margin-top:22px; max-width:44ch; }
+    .contact-list { margin-top:40px; display:grid; gap:18px; }
+    .contact-line { padding-top:17px; border-top:1px solid var(--light-line); display:grid; grid-template-columns:125px 1fr; gap:20px; font-size:14px; }
+    .contact-line span:first-child { color:rgba(255,255,255,.46); text-transform:uppercase; letter-spacing:.13em; font-size:10px; }
+    .contact-line a { text-decoration:none; }
+    .placeholder-note { color:rgba(255,255,255,.42); font-size:12px; }
+
+    .request-panel { background:#f6f2ea; color:var(--ink); padding:38px; }
+    .request-panel h3 { font-family:var(--serif); font-size:38px; font-weight:400; margin-bottom:8px; }
+    .request-panel > p { color:var(--muted); font-size:14px; margin-bottom:24px; }
+    .request-form { display:grid; gap:16px; }
+    .field { display:grid; gap:7px; }
+    .field label { font-size:9px; text-transform:uppercase; letter-spacing:.16em; color:var(--muted); }
+    .field input, .field textarea { width:100%; border:0; border-bottom:1px solid #c9c2b6; background:transparent; color:var(--ink); border-radius:0; padding:11px 0 13px; outline:none; }
+    .field input:focus, .field textarea:focus { border-color:var(--ink); }
+    .field textarea { min-height:92px; resize:vertical; }
+    .request-form .btn { justify-self:start; margin-top:8px; border:0; }
+    .request-success { display:none; min-height:260px; place-items:center; text-align:center; border:1px solid rgba(22,21,19,.16); padding:30px; }
+    .request-success h3 { font-family:var(--serif); font-size:38px; font-weight:400; }
+    .request-success p { margin-top:10px; color:var(--muted); }
+
+    /* Footer */
+    footer { background:#0e0d0c; color:#fff; padding:72px 0 30px; }
+    .footer-grid { display:grid; grid-template-columns:1.1fr .7fr .7fr; gap:56px; }
+    .footer-brand { font-family:var(--serif); font-size:46px; letter-spacing:.06em; }
+    .footer-tagline { color:rgba(255,255,255,.5); margin-top:10px; max-width:26ch; font-size:13px; }
+    .footer-col h4 { font-size:9px; text-transform:uppercase; letter-spacing:.18em; color:rgba(255,255,255,.42); margin-bottom:18px; }
+    .footer-col a, .footer-col p { display:block; text-decoration:none; font-size:13px; color:rgba(255,255,255,.76); margin-top:10px; }
+    .footer-bottom { margin-top:58px; padding-top:20px; border-top:1px solid rgba(255,255,255,.1); display:flex; justify-content:space-between; gap:20px; color:rgba(255,255,255,.38); font-size:11px; }
+
+    /* Reveal */
+    .reveal { opacity:0; transform:translateY(28px); transition: opacity .75s var(--ease), transform .75s var(--ease); }
+    .reveal.visible { opacity:1; transform:none; }
+
+    @media (max-width: 1080px) {
+      .desktop-nav { gap:17px; }
+      .desktop-nav a { font-size:10px; }
+      .collections-grid { grid-template-columns:repeat(2,1fr); }
+      .collection-card:last-child { grid-column:1 / -1; min-height:520px; }
+      .product-grid { grid-template-columns:repeat(2,1fr); }
+      .benefits-grid { grid-template-columns:repeat(2,1fr); }
+      .benefit:nth-child(3) { border-left:0; border-top:1px solid var(--line); }
+      .benefit:nth-child(4) { border-top:1px solid var(--line); }
+      .about-grid { gap:42px; }
+      .contact-grid { gap:48px; }
     }
 
-    .btn:hover,
-    .btn:focus {
-      background: var(--gold-soft);
+    @media (max-width: 840px) {
+      .wrap { width:min(100% - 36px, var(--max)); }
+      .section { padding:82px 0; }
+      .desktop-nav, .header-cta { display:none; }
+      .burger { display:block; }
+      .topbar-inner { height:68px; }
+      .hero { min-height:92svh; }
+      .hero::before { background-position:62% 35%; filter:blur(4px) saturate(.75); }
+      .hero-content { padding:140px 0 52px; }
+      .hero-foot { display:none; }
+      .section-head { display:block; }
+      .section-head .lead { margin-top:18px; }
+      .collections-grid { grid-template-columns:1fr; gap:12px; }
+      .collection-card, .collection-card:last-child { grid-column:auto; min-height:510px; }
+      .about-grid, .contact-grid { grid-template-columns:1fr; }
+      .about-media { order:2; min-height:520px; }
+      .about-media img { height:520px; }
+      .contact-grid { gap:52px; }
+      .footer-grid { grid-template-columns:1fr 1fr; }
+      .footer-grid > div:first-child { grid-column:1/-1; }
     }
 
-    footer {
-      padding: 24px 0 36px;
-      color: var(--muted);
-      font-size: 0.92rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    @media (max-width: 560px) {
+      .wrap { width:min(100% - 28px, var(--max)); }
+      .hero::before { background-position:67% center; }
+      .hero::after { background:linear-gradient(90deg, rgba(8,8,7,.77), rgba(8,8,7,.30)), linear-gradient(180deg, rgba(8,8,7,.16), rgba(8,8,7,.7)); }
+      .hero h1 { font-size:clamp(66px,25vw,105px); }
+      .hero-slogan { font-size:25px; }
+      .hero-categories { line-height:1.8; }
+      .hero-actions { flex-direction:column; align-items:stretch; max-width:330px; }
+      .section { padding:68px 0; }
+      .section--tight { padding:60px 0; }
+      .section-head { margin-bottom:28px; }
+      .section-head h2 { font-size:45px; }
+      .collection-card, .collection-card:last-child { min-height:450px; }
+      .collection-copy { left:20px; right:20px; bottom:20px; }
+      .product-grid { grid-template-columns:1fr 1fr; gap:30px 10px; }
+      .product-row { display:block; }
+      .product-row h3 { font-size:19px; }
+      .price { display:block; margin-top:5px; }
+      .product-links { display:block; }
+      .product-links a { display:inline-block; margin:4px 10px 0 0; }
+      .editorial { min-height:630px; }
+      .editorial-content { padding:54px 0; }
+      .benefits-grid { grid-template-columns:1fr; }
+      .benefit, .benefit + .benefit { border-left:0; border-top:1px solid var(--line); padding:24px 0 28px; }
+      .benefit:first-child { border-top:0; }
+      .benefit small { margin-bottom:16px; }
+      .about-media, .about-media img { min-height:430px; height:430px; }
+      .about-facts { gap:12px; }
+      .request-panel { padding:27px 20px; }
+      .contact-line { grid-template-columns:1fr; gap:6px; }
+      .footer-grid { grid-template-columns:1fr; gap:36px; }
+      .footer-grid > div:first-child { grid-column:auto; }
+      .footer-bottom { display:block; }
+      .footer-bottom span:last-child { display:block; margin-top:7px; }
     }
 
-    @media (max-width: 800px) {
-      .hero-grid,
-      .why-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .service {
-        grid-template-columns: 56px 1fr;
-      }
-
-      .icon {
-        width: 56px;
-        height: 56px;
-        font-size: 1.5rem;
-      }
-
-      .price {
-        grid-column: 2;
-      }
-
-      .hero-art {
-        min-height: 180px;
-        font-size: 4rem;
-      }
-
-      .btn {
-        width: 100%;
-      }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior:auto; }
+      *, *::before, *::after { animation:none !important; transition:none !important; }
+      .reveal { opacity:1; transform:none; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="wrap header-inner">
-      <a class="logo" href="#top">Буггати</a>
-      <nav>
-        <a href="#uslugi">Услуги</a>
-        <a href="#pochemu">Почему мы</a>
+  <header class="topbar" id="site-header">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#top" aria-label="ФАСОН — на главную">ФАСОН</a>
+      <nav class="desktop-nav" aria-label="Основная навигация">
+        <a href="#top">Главная</a>
+        <a href="#katalog">Каталог</a>
+        <a href="#palto">Пальто</a>
+        <a href="#pidzhaki">Пиджаки</a>
+        <a href="#kostyumy">Костюмы</a>
+        <a href="#o-nas">О нас</a>
         <a href="#kontakty">Контакты</a>
       </nav>
+      <a class="header-cta" href="https://wa.me/77763111131">Написать нам</a>
+      <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span></button>
     </div>
   </header>
 
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <nav aria-label="Мобильная навигация">
+      <a href="#top">Главная</a>
+      <a href="#katalog">Каталог</a>
+      <a href="#palto">Пальто</a>
+      <a href="#pidzhaki">Пиджаки</a>
+      <a href="#kostyumy">Костюмы</a>
+      <a href="#o-nas">О нас</a>
+      <a href="#kontakty">Контакты</a>
+      <a href="app.html">Личный кабинет</a>
+    </nav>
+    <div class="mobile-meta">Карагайлы 39 · 8 776 311 11 31</div>
+  </div>
+
   <main id="top">
-    <section class="hero">
-      <div class="wrap hero-grid">
-        <div>
-          <p class="eyebrow">Детейлинг-центр</p>
-          <h1>Буггати</h1>
-          <p class="lead">Премиальный уход за автомобилем в Алматы: бережная мойка, полировка, керамика и защита кузова. Работаем с любым классом машин — от повседневных до спорткаров.</p>
+    <section class="hero" aria-label="ФАСОН — мужская классическая одежда">
+      <div class="wrap">
+        <div class="hero-content">
+          <p class="eyebrow">Men's tailoring · classic wardrobe</p>
+          <h1 class="display">ФАСОН</h1>
+          <p class="hero-slogan">Мужская классика вне времени</p>
+          <p class="hero-categories">Пальто &nbsp;•&nbsp; Пиджаки &nbsp;•&nbsp; Костюмы</p>
+          <div class="hero-actions">
+            <a class="btn btn--light" href="#katalog">Смотреть коллекцию <span>↗</span></a>
+            <a class="btn btn--ghost-light" href="#kontakty">Связаться с нами</a>
+          </div>
         </div>
-        <div class="hero-art" aria-hidden="true">🚗</div>
       </div>
+      <div class="hero-foot">Semey · Kazakhstan</div>
     </section>
 
-    <section id="uslugi">
+    <section class="section" id="katalog">
       <div class="wrap">
-        <h2>Услуги</h2>
-        <p class="section-note">Цены указаны в тенге. Точная стоимость зависит от класса автомобиля — уточняйте у мастера.</p>
-        <div class="services">
-          <article class="service">
-            <div class="icon c1" aria-hidden="true">💧</div>
-            <div>
-              <h3>Комплексная мойка</h3>
-              <p>Двухфазная мойка кузова, дисков и арок с сушкой и чернением резины.</p>
-            </div>
-            <p class="price">от 8 000 ₸</p>
-          </article>
-          <article class="service">
-            <div class="icon c2" aria-hidden="true">✨</div>
-            <div>
-              <h3>Полировка кузова</h3>
-              <p>Убираем царапины и окисление, возвращаем заводской блеск ЛКП.</p>
-            </div>
-            <p class="price">от 45 000 ₸</p>
-          </article>
-          <article class="service">
-            <div class="icon c3" aria-hidden="true">🛡️</div>
-            <div>
-              <h3>Керамическое покрытие</h3>
-              <p>Защитный слой на 12–24 месяца: гидрофоб, блеск и проще мойка.</p>
-            </div>
-            <p class="price">от 120 000 ₸</p>
-          </article>
-          <article class="service">
-            <div class="icon c4" aria-hidden="true">🛋️</div>
-            <div>
-              <h3>Химчистка салона</h3>
-              <p>Сиденья, ковры, потолок и пластик. Удаляем запахи и пятна.</p>
-            </div>
-            <p class="price">от 35 000 ₸</p>
-          </article>
-          <article class="service">
-            <div class="icon c5" aria-hidden="true">🎞️</div>
-            <div>
-              <h3>Защитная плёнка PPF</h3>
-              <p>Оклейка капота, бампера и зон риска от сколов и пескоструя.</p>
-            </div>
-            <p class="price">от 250 000 ₸</p>
-          </article>
-          <article class="service">
-            <div class="icon c6" aria-hidden="true">⚙️</div>
-            <div>
-              <h3>Детейлинг дисков</h3>
-              <p>Глубокая очистка дисков, суппортов и обработка шин.</p>
-            </div>
-            <p class="price">от 12 000 ₸</p>
-          </article>
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow" style="color:var(--accent); margin-bottom:18px;">Коллекции / 2026</p>
+            <h2 class="display">Коллекции</h2>
+          </div>
+          <p class="lead">Классический гардероб мужчины — точные линии, спокойная палитра и вещи, которые работают дольше одного сезона.</p>
+        </div>
+        <div class="collections-grid">
+          <a class="collection-card reveal" id="palto" href="#products">
+            <!-- ЗАМЕНИТЬ ПРИ НЕОБХОДИМОСТИ: фото категории «Пальто» -->
+            <img src="https://images.unsplash.com/photo-1554935208-2bc12b516985?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000" alt="Мужское классическое пальто" loading="lazy">
+            <div class="collection-copy"><h3>Пальто</h3><span>→</span></div>
+          </a>
+          <a class="collection-card reveal" id="pidzhaki" href="#products">
+            <!-- ЗАМЕНИТЬ ПРИ НЕОБХОДИМОСТИ: фото категории «Пиджаки» -->
+            <img src="https://images.unsplash.com/photo-1773880374017-bfcbec581dc6?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000" alt="Мужской пиджак в редакционном стиле" loading="lazy">
+            <div class="collection-copy"><h3>Пиджаки</h3><span>→</span></div>
+          </a>
+          <a class="collection-card reveal" id="kostyumy" href="#products">
+            <!-- ЗАМЕНИТЬ ПРИ НЕОБХОДИМОСТИ: фото категории «Костюмы» -->
+            <img src="https://images.unsplash.com/photo-1768696082783-4313d98341ae?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000" alt="Мужской двубортный костюм" loading="lazy">
+            <div class="collection-copy"><h3>Костюмы</h3><span>→</span></div>
+          </a>
         </div>
       </div>
     </section>
 
-    <section class="why" id="pochemu">
+    <section class="section products-section" id="products">
       <div class="wrap">
-        <h2>Почему мы</h2>
-        <p class="section-note">Три причины доверить автомобиль «Буггати».</p>
-        <div class="why-grid">
-          <article class="why-card">
-            <div class="mark" aria-hidden="true">🏆</div>
-            <h3>Опыт с премиум-классом</h3>
-            <p>Мастера работают с дорогими покрытиями и знают, как не повредить сложную краску и плёнку.</p>
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow" style="color:var(--accent); margin-bottom:18px;">Выбор ФАСОН</p>
+            <h2 class="display">Избранные модели</h2>
+          </div>
+          <p class="lead">Актуальные позиции для делового гардероба, торжеств и повседневной классики.</p>
+        </div>
+
+        <div class="product-grid">
+          <article class="product-card reveal">
+            <div class="product-media"><span class="product-badge">Костюм</span><img src="https://images.unsplash.com/photo-1768696082783-4313d98341ae?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000" alt="Костюм Астана" loading="lazy"></div>
+            <div class="product-copy"><p class="product-kicker">Классическая линия</p><div class="product-row"><h3>Костюм «Астана»</h3><span class="price">89 900 ₸</span></div><div class="product-links"><a class="text-link" href="#zayavka">Подробнее</a><a class="text-link" href="https://wa.me/77763111131">Узнать наличие</a></div></div>
           </article>
-          <article class="why-card">
-            <div class="mark" aria-hidden="true">🧪</div>
-            <h3>Профессиональная химия</h3>
-            <p>Используем составы для детейлинга, а не бытовую мойку. Безопасно для керамики и кожи.</p>
+          <article class="product-card reveal">
+            <div class="product-media"><span class="product-badge">Пальто</span><img src="https://images.unsplash.com/photo-1554935208-2bc12b516985?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000" alt="Пальто Север" loading="lazy"></div>
+            <div class="product-copy"><p class="product-kicker">Осень / зима</p><div class="product-row"><h3>Пальто «Север»</h3><span class="price">74 500 ₸</span></div><div class="product-links"><a class="text-link" href="#zayavka">Подробнее</a><a class="text-link" href="https://wa.me/77763111131">Узнать наличие</a></div></div>
           </article>
-          <article class="why-card">
-            <div class="mark" aria-hidden="true">📜</div>
-            <h3>Гарантия на покрытие</h3>
-            <p>На керамику и плёнку даём письменную гарантию и бесплатный осмотр через месяц.</p>
+          <article class="product-card reveal">
+            <div class="product-media"><span class="product-badge">Пиджак</span><img src="https://images.unsplash.com/photo-1773880374017-bfcbec581dc6?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000" alt="Пиджак Кабинет" loading="lazy"></div>
+            <div class="product-copy"><p class="product-kicker">Smart classic</p><div class="product-row"><h3>Пиджак «Кабинет»</h3><span class="price">42 000 ₸</span></div><div class="product-links"><a class="text-link" href="#zayavka">Подробнее</a><a class="text-link" href="https://wa.me/77763111131">Узнать наличие</a></div></div>
+          </article>
+          <article class="product-card reveal">
+            <div class="product-media"><span class="product-badge">Брюки</span><img src="https://images.unsplash.com/photo-1782789086573-77dac305065e?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000" alt="Классический мужской образ" loading="lazy"></div>
+            <div class="product-copy"><p class="product-kicker">Tailored fit</p><div class="product-row"><h3>Брюки «Линия»</h3><span class="price">24 900 ₸</span></div><div class="product-links"><a class="text-link" href="#zayavka">Подробнее</a><a class="text-link" href="https://wa.me/77763111131">Узнать наличие</a></div></div>
+          </article>
+          <article class="product-card reveal">
+            <div class="product-media"><span class="product-badge">Обувь</span><img src="https://images.unsplash.com/photo-1768696082783-4313d98341ae?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000" alt="Мужской классический образ с обувью" loading="lazy"></div>
+            <div class="product-copy"><p class="product-kicker">Formal</p><div class="product-row"><h3>Туфли «Вечер»</h3><span class="price">31 500 ₸</span></div><div class="product-links"><a class="text-link" href="#zayavka">Подробнее</a><a class="text-link" href="https://wa.me/77763111131">Узнать наличие</a></div></div>
+          </article>
+          <article class="product-card reveal">
+            <div class="product-media"><span class="product-badge">Аксессуары</span><img src="https://images.unsplash.com/photo-1782789086573-77dac305065e?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000" alt="Галстук и жилет в классическом образе" loading="lazy"></div>
+            <div class="product-copy"><p class="product-kicker">Details</p><div class="product-row"><h3>Галстук и бабочка «Узел»</h3><span class="price">6 900 ₸</span></div><div class="product-links"><a class="text-link" href="#zayavka">Подробнее</a><a class="text-link" href="https://wa.me/77763111131">Узнать наличие</a></div></div>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="kontakty">
+    <section class="editorial" id="image-block">
+      <img id="parallax-image" src="https://images.unsplash.com/photo-1773880374017-bfcbec581dc6?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000" alt="Мужчина в классическом костюме" loading="lazy">
+      <div class="wrap editorial-content reveal">
+        <p class="eyebrow" style="margin-bottom:20px;color:rgba(255,255,255,.65);">Fason signature</p>
+        <h2 class="display">Классика.<br>Характер. ФАСОН.</h2>
+        <p>Одежда для мужчин, которые ценят качество, посадку и стиль.</p>
+        <a class="btn btn--ghost-light" href="#o-nas">О бренде</a>
+      </div>
+    </section>
+
+    <section class="section--tight" id="pochemu">
+      <span id="uslugi" style="position:relative;top:-90px;display:block;visibility:hidden" aria-hidden="true"></span>
       <div class="wrap">
-        <h2>Контакты</h2>
-        <p class="section-note">Приезжайте в бокс или напишите в WhatsApp — подскажем свободное окно.</p>
-        <div class="contacts-box">
-          <dl>
-            <div>
-              <dt>Адрес</dt>
-              <dd>г. Алматы, ул. Сатпаева, 90/5, детейлинг-бокс «Буггати»</dd>
-            </div>
-            <div>
-              <dt>Телефон</dt>
-              <dd><a class="phone" href="tel:+77475551890">+7 (747) 555-18-90</a></dd>
-            </div>
-            <div>
-              <dt>Часы работы</dt>
-              <dd>ежедневно с 09:00 до 21:00</dd>
-            </div>
-            <div>
-              <dt>График работы</dt>
-              <dd>понедельник — воскресенье, без выходных</dd>
-            </div>
-          </dl>
-          <a class="btn" href="https://wa.me/77475551890">Написать в WhatsApp</a>
+        <div class="benefits-grid reveal">
+          <article class="benefit"><small>01</small><h3>Премиальные материалы</h3><p>Ткани и материалы высокого качества с акцентом на тактильность и долговечность.</p></article>
+          <article class="benefit"><small>02</small><h3>Идеальная посадка</h3><p>Подбираем модели с учётом роста, пропорций и особенностей фигуры.</p></article>
+          <article class="benefit"><small>03</small><h3>Персональный подбор</h3><p>Собираем законченный образ — от костюма и пальто до аксессуаров.</p></article>
+          <article class="benefit"><small>04</small><h3>Проверенный стиль</h3><p>Классика, которая остаётся актуальной независимо от быстрых трендов.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="o-nas">
+      <div class="wrap about-grid">
+        <div class="about-media reveal">
+          <img src="https://images.unsplash.com/photo-1718184021018-d2158af6b321?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000" alt="Работа с тканью и деталями мужского костюма" loading="lazy">
+        </div>
+        <div class="about-copy reveal">
+          <p class="eyebrow">О магазине ФАСОН</p>
+          <h2 class="display">Стиль начинается с посадки</h2>
+          <p class="intro">Мы собираем мужской гардероб так, чтобы каждая вещь работала на образ — спокойно, точно и уверенно.</p>
+          <p>ФАСОН — магазин классической мужской одежды: костюмы, пальто, пиджаки, брюки, рубашки, обувь и аксессуары. Помогаем подобрать вещи по фигуре и собрать цельный комплект для работы, торжества или повседневного гардероба.</p>
+          <div class="about-facts"><div><strong>1 образ</strong><span>в одном месте</span></div><div><strong>09:00–18:00</strong><span>часы работы</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-zone" id="kontakty">
+      <div class="wrap contact-grid">
+        <div class="contact-intro reveal">
+          <p class="eyebrow" style="color:var(--accent);margin-bottom:20px;">Контакты</p>
+          <h2 class="display">Приходите<br>на примерку</h2>
+          <p>Напишите нам заранее — подскажем по размеру, наличию и поможем подготовить варианты к вашему приезду.</p>
+          <div class="contact-list">
+            <div class="contact-line"><span>Адрес</span><strong>Карагайлы 39</strong></div>
+            <div class="contact-line"><span>Телефон</span><a href="tel:+77763111131">8 776 311 11 31</a></div>
+            <div class="contact-line"><span>WhatsApp</span><a href="https://wa.me/77763111131">Написать в WhatsApp ↗</a></div>
+            <div class="contact-line"><span>График</span><div>09:00–18:00 · 5/2</div></div>
+            <!-- ЗАМЕНИТЬ: укажите реальный Instagram магазина -->
+            <div class="contact-line"><span>Instagram</span><div>Instagram магазина <span class="placeholder-note">· добавьте @username</span></div></div>
+          </div>
+        </div>
+
+        <div class="request-panel reveal" id="zayavka">
+          <h3>Персональный подбор</h3>
+          <p>Оставьте контакты — перезвоним и поможем подобрать костюм, пальто или готовый образ.</p>
+          <form class="request-form" id="request-form" novalidate>
+            <div class="field"><label for="req-name">Имя</label><input type="text" id="req-name" name="name" autocomplete="name" required></div>
+            <div class="field"><label for="req-phone">Телефон</label><input type="tel" id="req-phone" name="phone" autocomplete="tel" required></div>
+            <div class="field"><label for="req-comment">Что вас интересует</label><textarea id="req-comment" name="comment" placeholder="Например: двубортный костюм, размер 52"></textarea></div>
+            <button type="submit" class="btn btn--dark">Оставить заявку</button>
+          </form>
+          <div class="request-success" id="request-success">
+            <div><h3>Спасибо!</h3><p>Заявка получена. Мы свяжемся с вами.</p></div>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="wrap">© 2026 Детейлинг-центр «Буггати», Алматы</div>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div><div class="footer-brand">ФАСОН</div><p class="footer-tagline">Мужская классическая одежда. Костюмы, пальто, пиджаки и законченные образы.</p></div>
+        <div class="footer-col"><h4>Навигация</h4><a href="#katalog">Каталог</a><a href="#o-nas">О нас</a><a href="#kontakty">Контакты</a><a href="app.html">Личный кабинет</a></div>
+        <div class="footer-col"><h4>Связь</h4><a href="tel:+77763111131">8 776 311 11 31</a><a href="https://wa.me/77763111131">WhatsApp</a><p>Карагайлы 39</p></div>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> ФАСОН. Все права защищены.</span><span>Men's classic wardrobe</span></div>
+    </div>
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = "https://ypmrlyaimpsgnahhzxat.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_1laacUTH9OiLBRLCT2aJ_w_lfcJLCcH";
+    const WEBHOOK_URL = "https://hook.eu1.make.com/ps9flxxlhnf813foeay2q4n2e1mtltnw";
+
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    (function () {
+      var form = document.getElementById('request-form');
+      var success = document.getElementById('request-success');
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        var payload = {
+          name: document.getElementById('req-name').value.trim(),
+          phone: document.getElementById('req-phone').value.trim(),
+          message: document.getElementById('req-comment').value.trim()
+        };
+
+        const { error } = await supabaseClient
+          .from('заявки')
+          .insert(payload);
+
+        if (error) {
+          console.error('Supabase error:', error);
+          return;
+        }
+
+        try {
+          const webhookResponse = await fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (!webhookResponse.ok) {
+            console.warn('Webhook error: HTTP ' + webhookResponse.status);
+          }
+        } catch (webhookError) {
+          console.warn('Webhook error:', webhookError);
+        }
+
+        form.style.display = 'none';
+        success.style.display = 'grid';
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      const header = document.getElementById('site-header');
+      const burger = document.getElementById('burger');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const parallaxImage = document.getElementById('parallax-image');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function syncHeader() {
+        header.classList.toggle('scrolled', window.scrollY > 28);
+      }
+      syncHeader();
+      window.addEventListener('scroll', syncHeader, { passive: true });
+
+      function closeMenu() {
+        burger.classList.remove('active');
+        burger.setAttribute('aria-expanded', 'false');
+        mobileMenu.classList.remove('open');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('menu-open');
+      }
+      burger.addEventListener('click', function () {
+        const open = !mobileMenu.classList.contains('open');
+        burger.classList.toggle('active', open);
+        burger.setAttribute('aria-expanded', String(open));
+        mobileMenu.classList.toggle('open', open);
+        mobileMenu.setAttribute('aria-hidden', String(!open));
+        document.body.classList.toggle('menu-open', open);
+      });
+      mobileMenu.querySelectorAll('a').forEach(function (link) { link.addEventListener('click', closeMenu); });
+
+      if ('IntersectionObserver' in window && !reduceMotion) {
+        const observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: .12, rootMargin: '0px 0px -40px' });
+        document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+      } else {
+        document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); });
+      }
+
+      if (parallaxImage && !reduceMotion) {
+        window.addEventListener('scroll', function () {
+          const rect = parallaxImage.parentElement.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+            parallaxImage.style.setProperty('--parallax', ((progress - .5) * 46).toFixed(1) + 'px');
+          }
+        }, { passive: true });
+      }
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
 </body>
 </html>

@@ -3,363 +3,167 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Личный кабинет — Фасон</title>
+  <meta name="theme-color" content="#171614">
+  <title>Личный кабинет — ФАСОН</title>
   <style>
     :root {
-      --bg: #f6f4f1;
-      --bg-alt: #ffffff;
-      --ink: #111111;
-      --muted: #5c5c5c;
-      --line: #e4dfd8;
-      --accent: #000000;
-      --error: #8a1f1f;
+      --ink:#171614;
+      --paper:#f3f0e9;
+      --ivory:#fbf9f4;
+      --muted:#756f66;
+      --line:rgba(28,25,22,.15);
+      --accent:#a99067;
+      --error:#9d3737;
+      --serif:Georgia,"Times New Roman",serif;
+      --sans:Inter,"Helvetica Neue",Arial,sans-serif;
+      --max:1180px;
+      --ease:cubic-bezier(.2,.7,.2,1);
     }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{min-height:100vh;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+    body.menu-open{overflow:hidden}
+    a{color:inherit}
+    button,input{font:inherit}
+    .wrap{width:min(var(--max),calc(100% - 56px));margin:0 auto}
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    .topbar{position:sticky;top:0;z-index:50;background:rgba(243,240,233,.84);border-bottom:1px solid var(--line);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+    .topbar-inner{height:72px;display:flex;align-items:center;justify-content:space-between;gap:28px}
+    .brand{text-decoration:none;font-family:var(--serif);font-size:27px;letter-spacing:.09em;font-weight:600}
+    .desktop-nav{margin-left:auto;display:flex;gap:22px;align-items:center}
+    .desktop-nav a{text-decoration:none;text-transform:uppercase;font-size:10px;letter-spacing:.14em}
+    .desktop-nav a:hover{opacity:.58}
+    .burger{display:none;width:44px;height:44px;border:0;background:none;position:relative;cursor:pointer}
+    .burger span{position:absolute;left:10px;width:24px;height:1px;background:currentColor;transition:.25s ease}
+    .burger span:first-child{top:17px}.burger span:last-child{top:25px}.burger.active span:first-child{top:21px;transform:rotate(45deg)}.burger.active span:last-child{top:21px;transform:rotate(-45deg)}
+    .mobile-menu{display:none;position:fixed;z-index:40;inset:0;background:#151412;color:#fff;padding:108px 28px 40px}
+    .mobile-menu.open{display:flex;flex-direction:column}
+    .mobile-menu nav{display:grid;gap:12px}.mobile-menu a{text-decoration:none;font-family:var(--serif);font-size:38px}
+    .mobile-menu p{margin-top:auto;color:rgba(255,255,255,.5);font-size:12px}
 
-    body {
-      font-family: Georgia, "Times New Roman", Times, serif;
-      background: var(--bg);
-      color: var(--ink);
-      line-height: 1.55;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+    main{min-height:calc(100vh - 72px)}
+    .account-hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+    .account-hero::after{content:"";position:absolute;right:-8%;top:-34%;width:48vw;height:48vw;border-radius:50%;background:radial-gradient(circle,rgba(169,144,103,.17),rgba(169,144,103,0) 68%);pointer-events:none}
+    .hero-grid{display:grid;grid-template-columns:.86fr 1.14fr;gap:68px;align-items:start;padding:86px 0 98px;position:relative;z-index:1}
+    .hero-copy{padding-top:16px}
+    .eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.19em;color:var(--accent);font-weight:650}
+    h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.035em;line-height:1}
+    h1{font-size:clamp(58px,8vw,104px);margin-top:18px}
+    .lead{margin-top:20px;color:var(--muted);max-width:42ch;font-size:15px}
+    .hero-note{margin-top:42px;padding-top:20px;border-top:1px solid var(--line);display:flex;gap:12px;align-items:center;color:var(--muted);font-size:12px}
+    .hero-note::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);flex:0 0 auto}
 
-    a {
-      color: inherit;
-    }
+    .panel,.card{background:rgba(251,249,244,.88);border:1px solid var(--line);box-shadow:0 24px 60px rgba(42,35,27,.06)}
+    .panel{padding:38px;max-width:560px;margin-left:auto;width:100%}
+    .panel h2{font-size:42px;margin-bottom:22px}
+    .form-tag{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+    label{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin:16px 0 5px}
+    input{width:100%;border:0;border-bottom:1px solid #c9c3b9;background:transparent;padding:11px 0 12px;color:var(--ink);outline:none;border-radius:0}
+    input:focus{border-color:var(--ink)}
+    .btn,.btn-ghost{display:inline-flex;align-items:center;justify-content:center;min-height:48px;margin-top:24px;padding:0 20px;border:1px solid var(--ink);cursor:pointer;text-transform:uppercase;font-size:9px;font-weight:650;letter-spacing:.16em;transition:transform .2s var(--ease),background .2s ease,color .2s ease}
+    .btn{background:var(--ink);color:#fff}.btn:hover,.btn-ghost:hover{transform:translateY(-2px)}
+    .btn-ghost{background:transparent;color:var(--ink);margin-left:8px}
+    .switch{margin-top:20px;color:var(--muted);font-size:13px}.switch-link{border:0;background:none;padding:0;color:var(--ink);text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+    .msg{margin-top:18px;font-size:13px}.msg.error{color:var(--error)}
 
-    .wrap {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto;
-    }
+    .cabinet{display:grid;gap:18px;max-width:760px;margin-left:auto}
+    .card{padding:32px}.card h2{font-size:38px}.card h3{font-size:31px;margin-bottom:10px}
+    .muted{color:var(--muted);font-size:13px}
+    .records{list-style:none;margin-top:24px;display:grid;gap:9px}
+    .record{display:flex;align-items:center;justify-content:space-between;gap:18px;border-top:1px solid var(--line);padding:16px 0}
+    .record p{font-family:var(--serif);font-size:20px}.record small{display:block;color:var(--muted);font-size:11px;margin-top:4px;letter-spacing:.06em}
+    .record .btn{margin-top:0;min-height:38px;padding:0 13px;font-size:8px;background:transparent;color:var(--ink)}
+    .record .btn:hover{background:var(--ink);color:#fff}
+    .hidden{display:none!important}
 
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(246, 244, 241, 0.94);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(8px);
-    }
+    footer{background:#11100e;color:#fff;padding:32px 0}.footer-row{display:flex;justify-content:space-between;gap:20px;align-items:center;color:rgba(255,255,255,.48);font-size:11px}.footer-row strong{font-family:var(--serif);font-size:24px;color:#fff;letter-spacing:.07em}
 
-    .topbar-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 14px 0;
-    }
-
-    .brand,
-    h1 {
-      font-family: Impact, "Arial Black", "Segoe UI Black", sans-serif;
-      font-weight: 900;
-      font-style: italic;
-      text-transform: uppercase;
-      letter-spacing: -0.06em;
-      line-height: 0.9;
-    }
-
-    .brand {
-      font-size: 26px;
-      text-decoration: none;
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px 18px;
-    }
-
-    nav a {
-      text-decoration: none;
-      font-size: 14px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    nav a:hover,
-    .btn:hover,
-    .btn-ghost:hover,
-    .switch-link:hover {
-      opacity: 0.72;
-    }
-
-    main {
-      flex: 1;
-      padding: 56px 0 72px;
-    }
-
-    h1 {
-      font-size: clamp(40px, 8vw, 72px);
-      margin-bottom: 12px;
-    }
-
-    h2, h3 {
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.12;
-    }
-
-    h2 {
-      font-size: clamp(28px, 4vw, 36px);
-      margin-bottom: 10px;
-    }
-
-    h3 {
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
-
-    .lead {
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--muted);
-      max-width: 52ch;
-    }
-
-    .panel {
-      margin-top: 32px;
-      background: var(--bg-alt);
-      border: 1px solid var(--line);
-      padding: 28px;
-      max-width: 520px;
-    }
-
-    .cabinet {
-      margin-top: 32px;
-      display: grid;
-      gap: 16px;
-    }
-
-    .card {
-      background: var(--bg-alt);
-      border: 1px solid var(--line);
-      padding: 24px;
-    }
-
-    label {
-      display: block;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 13px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin: 16px 0 8px;
-    }
-
-    input {
-      width: 100%;
-      border: 1px solid var(--line);
-      background: #fff;
-      padding: 12px 14px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 16px;
-      color: var(--ink);
-    }
-
-    input:focus {
-      outline: 2px solid var(--ink);
-      outline-offset: 1px;
-    }
-
-    .btn,
-    .btn-ghost {
-      display: inline-block;
-      margin-top: 22px;
-      padding: 14px 22px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 14px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      border: 0;
-      cursor: pointer;
-    }
-
-    .btn {
-      background: var(--accent);
-      color: #fff;
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--ink);
-      border: 1px solid var(--ink);
-      margin-left: 10px;
-    }
-
-    .switch {
-      margin-top: 18px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .switch-link {
-      background: none;
-      border: 0;
-      padding: 0;
-      font: inherit;
-      color: var(--ink);
-      text-decoration: underline;
-      cursor: pointer;
-    }
-
-    .msg {
-      margin-top: 16px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 15px;
-    }
-
-    .msg.error {
-      color: var(--error);
-    }
-
-    .muted {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 15px;
-      color: #333;
-    }
-
-    .records {
-      list-style: none;
-      margin-top: 22px;
-      display: grid;
-      gap: 12px;
-    }
-
-    .record {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      border: 1px solid var(--line);
-      padding: 14px 16px;
-    }
-
-    .record p {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 15px;
-    }
-
-    .record small {
-      display: block;
-      margin-top: 4px;
-      color: var(--muted);
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 13px;
-    }
-
-    .record .btn {
-      margin-top: 0;
-      padding: 10px 14px;
-      font-size: 12px;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 28px 0 40px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    @media (max-width: 520px) {
-      .topbar-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .btn-ghost {
-        margin-left: 0;
-        margin-top: 12px;
-      }
-    }
+    @media(max-width:880px){.desktop-nav{display:none}.burger{display:block}.hero-grid{grid-template-columns:1fr;gap:38px;padding:62px 0 72px}.panel,.cabinet{margin-left:0;max-width:100%}.hero-copy{max-width:620px}.account-hero::after{width:80vw;height:80vw;right:-28%;top:-12%}}
+    @media(max-width:560px){.wrap{width:calc(100% - 28px)}.topbar-inner{height:66px}.hero-grid{padding:46px 0 58px}.hero-copy{padding-top:0}h1{font-size:64px}.panel,.card{padding:24px 19px}.panel h2{font-size:36px}.card h2{font-size:31px}.record{align-items:flex-start}.record .btn{margin-top:0}.footer-row{display:block}.footer-row span{display:block;margin-top:5px}.btn-ghost{margin-left:0}}
   </style>
 </head>
 <body>
   <header class="topbar">
     <div class="wrap topbar-inner">
-      <a class="brand" href="index.html">Фасон</a>
-      <nav>
-        <a href="index.html#uslugi">Услуги</a>
+      <a class="brand" href="index.html">ФАСОН</a>
+      <nav class="desktop-nav" aria-label="Навигация">
         <a href="index.html#katalog">Каталог</a>
+        <a href="index.html#palto">Пальто</a>
+        <a href="index.html#kostyumy">Костюмы</a>
+        <a href="index.html#o-nas">О нас</a>
         <a href="index.html#kontakty">Контакты</a>
-        <a href="app.html">Кабинет</a>
       </nav>
+      <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span></button>
     </div>
   </header>
 
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <nav><a href="index.html">Главная</a><a href="index.html#katalog">Каталог</a><a href="index.html#o-nas">О нас</a><a href="index.html#kontakty">Контакты</a></nav>
+    <p>ФАСОН · мужская классическая одежда</p>
+  </div>
+
   <main>
-    <div class="wrap">
-      <h1>Кабинет</h1>
-      <p class="lead">Войдите, чтобы смотреть свои записи. Регистрация — по почте и паролю.</p>
+    <section class="account-hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Private client area</p>
+          <h1>Личный<br>кабинет</h1>
+          <p class="lead">Войдите, чтобы смотреть свои записи. Регистрация — по почте и паролю.</p>
+          <div class="hero-note">Ваши рабочие данные и записи остаются в существующей системе.</div>
+        </div>
 
-      <section id="auth" class="panel hidden">
-        <form id="login-form">
-          <h2>Вход</h2>
-          <label for="login-email">Почта</label>
-          <input id="login-email" name="email" type="email" autocomplete="email" required>
-          <label for="login-password">Пароль</label>
-          <input id="login-password" name="password" type="password" autocomplete="current-password" required>
-          <button class="btn" type="submit">Войти</button>
-          <p class="switch">
-            Нет аккаунта?
-            <button class="switch-link" type="button" data-show="register-form">Регистрация</button>
-          </p>
-        </form>
+        <div>
+          <section id="auth" class="panel hidden">
+            <form id="login-form">
+              <p class="form-tag">ФАСОН / Client</p>
+              <h2>Вход</h2>
+              <label for="login-email">Почта</label>
+              <input id="login-email" name="email" type="email" autocomplete="email" required>
+              <label for="login-password">Пароль</label>
+              <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+              <button class="btn" type="submit">Войти</button>
+              <p class="switch">Нет аккаунта? <button class="switch-link" type="button" data-show="register-form">Регистрация</button></p>
+            </form>
 
-        <form id="register-form" class="hidden">
-          <h2>Регистрация</h2>
-          <label for="register-email">Почта</label>
-          <input id="register-email" name="email" type="email" autocomplete="email" required>
-          <label for="register-password">Пароль</label>
-          <input id="register-password" name="password" type="password" autocomplete="new-password" required minlength="6">
-          <button class="btn" type="submit">Зарегистрироваться</button>
-          <p class="switch">
-            Уже есть аккаунт?
-            <button class="switch-link" type="button" data-show="login-form">Вход</button>
-          </p>
-        </form>
+            <form id="register-form" class="hidden">
+              <p class="form-tag">ФАСОН / Client</p>
+              <h2>Регистрация</h2>
+              <label for="register-email">Почта</label>
+              <input id="register-email" name="email" type="email" autocomplete="email" required>
+              <label for="register-password">Пароль</label>
+              <input id="register-password" name="password" type="password" autocomplete="new-password" required minlength="6">
+              <button class="btn" type="submit">Зарегистрироваться</button>
+              <p class="switch">Уже есть аккаунт? <button class="switch-link" type="button" data-show="login-form">Вход</button></p>
+            </form>
+            <p id="auth-msg" class="msg" hidden></p>
+          </section>
 
-        <p id="auth-msg" class="msg" hidden></p>
-      </section>
-
-      <section id="cabinet" class="cabinet hidden">
-        <article class="card">
-          <h2 id="welcome">Вы вошли</h2>
-          <form id="logout-form">
-            <button class="btn" type="submit">Выйти</button>
-          </form>
-        </article>
-        <article class="card">
-          <h3>Мои записи</h3>
-          <form id="zapisi-form">
-            <label for="zapisi-title">Что</label>
-            <input id="zapisi-title" name="title" type="text" required>
-            <label for="zapisi-data">Когда</label>
-            <input id="zapisi-data" name="data" type="date" required>
-            <button class="btn" type="submit">Добавить</button>
-          </form>
-          <p id="zapisi-msg" class="msg" hidden></p>
-          <ul id="zapisi-list" class="records"></ul>
-        </article>
-      </section>
-    </div>
+          <section id="cabinet" class="cabinet hidden">
+            <article class="card">
+              <p class="form-tag">Account status</p>
+              <h2 id="welcome">Вы вошли</h2>
+              <form id="logout-form"><button class="btn-ghost" type="submit">Выйти</button></form>
+            </article>
+            <article class="card">
+              <p class="form-tag">Appointments</p>
+              <h3>Мои записи</h3>
+              <form id="zapisi-form">
+                <label for="zapisi-title">Что</label>
+                <input id="zapisi-title" name="title" type="text" required>
+                <label for="zapisi-data">Когда</label>
+                <input id="zapisi-data" name="data" type="date" required>
+                <button class="btn" type="submit">Добавить</button>
+              </form>
+              <p id="zapisi-msg" class="msg" hidden></p>
+              <ul id="zapisi-list" class="records"></ul>
+            </article>
+          </section>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    <div class="wrap">Фасон — мужские костюмы и пальто</div>
-  </footer>
+  <footer><div class="wrap footer-row"><strong>ФАСОН</strong><span>Мужские костюмы, пальто и классический гардероб</span></div></footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
@@ -584,6 +388,15 @@
         authSection.classList.remove("hidden");
       }
     });
+  </script>
+  <script>
+    (function(){
+      const burger=document.getElementById('burger');
+      const menu=document.getElementById('mobile-menu');
+      function closeMenu(){burger.classList.remove('active');burger.setAttribute('aria-expanded','false');menu.classList.remove('open');menu.setAttribute('aria-hidden','true');document.body.classList.remove('menu-open')}
+      burger.addEventListener('click',function(){const open=!menu.classList.contains('open');burger.classList.toggle('active',open);burger.setAttribute('aria-expanded',String(open));menu.classList.toggle('open',open);menu.setAttribute('aria-hidden',String(!open));document.body.classList.toggle('menu-open',open)});
+      menu.querySelectorAll('a').forEach(function(link){link.addEventListener('click',closeMenu)});
+    })();
   </script>
 </body>
 </html>
